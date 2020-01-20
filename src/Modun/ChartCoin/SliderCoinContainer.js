@@ -38,21 +38,29 @@ const SliderCoinContainer = () => {
 
     ]
     return (
-        <Wrap>
-            <SliderCoin>
-                {
-                    coinData.map((index, i) =>
-                        <Coin key={i} {...index} />
-                    )
-                }
-            </SliderCoin>
-        </Wrap>
+        <div classname="mat-card ticker-slider">
+            <Row>
+                <Wrap>
+                    <SliderCoin>
+                        {
+                            coinData.map((index, i) =>
+                                <Coin key={i} {...index} />
+                            )
+                        }
+                    </SliderCoin>
+                </Wrap>
+            </Row>
+        </div>
     )
 }
 
 export default SliderCoinContainer
+const Row = styled.div`
+    padding: 0 1rem;
+`
 const Wrap = styled.div`
     background:#37474f;
     margin-bottom:30px;
     border-radius:10px;
+    padding:0 1rem;
 `

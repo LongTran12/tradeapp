@@ -1,7 +1,7 @@
 import React from 'react'
 import ChartCoin from '../../component/chartCoin/ChartCoin';
 import moment from 'moment';
-import imgCoin from '../../assets/images/image1.png'
+import imgCoin from '../../assets/images/btc.svg'
 
 const ChartBitcoin = () => {
     const data = [
@@ -24,7 +24,7 @@ const ChartBitcoin = () => {
     ];
     return (
         <>
-            <ChartCoin data={data} coinName="Bitcoin" srcCoin={imgCoin} lineColor="#1565c0" />
+            <ChartCoin data={data} coinName="Bitcoin" srcCoin={imgCoin} lineColor="#1565c0" backgr="#1565c0" />
         </>
     )
 }

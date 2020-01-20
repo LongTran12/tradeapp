@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 
 const SliderCoin = ({ children }) => {
     const settings = {
-        dots: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,

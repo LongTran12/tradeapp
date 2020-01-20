@@ -1,7 +1,7 @@
 import React from 'react'
 import ChartCoin from '../../component/chartCoin/ChartCoin';
 import moment from 'moment';
-import imgCoin from '../../assets/images/image8.png'
+import imgCoin from '../../assets/images/etc-alt.svg'
 
 const ChartUSD = () => {
     const data = [

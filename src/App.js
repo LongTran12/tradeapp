@@ -13,42 +13,56 @@ import Menu from './component/menu/Menu';
 
 function App() {
     return (
-        <Site>
-
+        <div className="app .sidebar-color-dark header-color-dark side-panel-opened collapsed-sidebar">
+            <div class="mat-drawer-backdrop ng-star-inserted"></div>
+            <div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div>
             <Menu />
+            <Site className="mat-drawer-content mat-sidenav-content ng-star-inserted">
+                {/* <div className="gene-header-toolbar mat-toolbar mat-toolbar-single-row">
+                    <div className="gene-ham-icon">
+                        <button class="mat-mini-fab mat-button-base mat-primary" color="primary" mat-card-icon="" mat-mini-fab="">
+                            <span class="mat-button-wrapper">
+                                <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">menu</mat-icon>
+                            </span>
+                            <div class="mat-button-ripple mat-ripple mat-button-ripple-round"></div><div class="mat-button-focus-overlay">
+                            </div>
+                        </button>
+                    </div>
+                </div> */}
 
-            <Wrap>
-                <ChartCoinContainer />
-            </Wrap>
-            <Wrap>
-                <CandleStickContainer />
-            </Wrap>
-            <Wrap>
-                <TableHistory />
-            </Wrap>
-            <Wrap>
-                <Row>
-                    <Column>
-                        <ExchangeRateContainer />
-                    </Column>
-                    <Column>
-                        <QuickTrade />
-                    </Column>
-                    <Column>
-                        <RecentTrade />
-                    </Column>
-                </Row>
-            </Wrap>
-        </Site>
+                <Wrap>
+                    <ChartCoinContainer />
+                </Wrap>
+                <Wrap>
+                    <CandleStickContainer />
+                </Wrap>
+                <Wrap>
+                    <TableHistory />
+                </Wrap>
+                <Wrap>
+                    <Row>
+                        <Column>
+                            <ExchangeRateContainer />
+                        </Column>
+                        <Column>
+                            <QuickTrade />
+                        </Column>
+                        <Column>
+                            <RecentTrade />
+                        </Column>
+                    </Row>
+                </Wrap>
+            </Site>
+        </div>
     );
 }
 
 export default App;
 const Site = styled.div`
-    padding:6em 10em 0 10em;
+    padding:6em 25px 0 5px;
     
     @media (max-width:1280px){
-        padding:6em 30px 0 30px;
+        padding:6em 60px 0 25px;
     }
     @media (max-width:991px){
         padding:6em 30px 0 30px;
@@ -69,16 +83,11 @@ const Row = styled.div`
     grid-column-gap:30px; */
     display:flex;
     flex-flow:row wrap;
-    margin:0 -15px;
     /* width:100%; */
     @media (max-width:991px){
          margin:0;   
     }
 `
 const Column = styled.div`
-    margin:15px;
     flex:1;
-    @media (max-width:991px){
-         margin:15px 0;   
-    }
 `

@@ -40,7 +40,7 @@ const QuickTrade = () => {
         setValue(newValue);
     };
     return (
-        <div>
+        <div className="stats-card-wrap mat-card">
             <TextHeader text="Quick Trade" />
             <Wrap>
                 <AppBar position="static" color="default">
@@ -80,8 +80,20 @@ const Wrap = styled.div`
     .MuiTab-labelIcon{
         min-height:48px;
     }
+    .MuiAppBar-colorDefault{
+        background-color:#fff;
+        box-shadow:unset;
+        svg{
+            width:15px;
+            height:15px;
+        }
+    }
+    .MuiBox-root{
+        padding:25px 0;
+    }
 `
 const WrapTab = styled.div`
     background:#fff;
     border-radius:0 0 10px 10px;
+    margin-top:8px;
 `

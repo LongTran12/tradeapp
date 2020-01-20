@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CoinName = ({ srcCoin, coinName }) => {
+const CoinName = ({ srcCoin, coinName, backgr }) => {
     return (
         <Wrap>
-            <Image alt="coin" src={srcCoin} />
+            <Image alt="coin" src={srcCoin} backgr={backgr} />
             <span style={{ marginRight: 10 }} />
             <Text>{coinName}</Text>
         </Wrap>
@@ -21,8 +21,12 @@ const Wrap = styled.div`
 `
 const Text = styled.h2`
     font-size:24px;
+    margin-bottom:0;
 `
 const Image = styled.img`
     width:40px;
     height:40px;
+    svg{
+        fill:${props => props.backgr}
+    }
 `

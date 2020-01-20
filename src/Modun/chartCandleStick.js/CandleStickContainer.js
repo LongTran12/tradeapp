@@ -24,10 +24,10 @@ const CandleStickContainer = () => {
         ['2015/12/16', '3522.09', '3516.19', '5.83', '0.17%', '3506.29', '3538.69', '193482304', '26528864', '-'],
     ]
     return (
-        <>
+        <div className="stats-card-wrap mat-card">
             <TextHeader text="OTE / USD" />
             <CandleStick rawData={rawData} />
-        </>
+        </div>
     )
 }
 

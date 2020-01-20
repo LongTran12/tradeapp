@@ -57,7 +57,7 @@ const ExchangeRateContainer = () => {
         setCoinChange(event.target.value);
     };
     return (
-        <div>
+        <div className="stats-card-wrap mat-card">
             <TextHeader text="Exchange Rate" />
             <Wrap>
                 <ExchangeRate inputLabel="Choose Currency"
@@ -86,7 +86,7 @@ export default ExchangeRateContainer
 const Wrap = styled.div`
     background:#fff;
     border-radius:0  0 10px 10px ;
-    padding:25px 15px;
+    padding:15px 0 0;
         display: flex;
     flex-flow: column;
     align-items: center;

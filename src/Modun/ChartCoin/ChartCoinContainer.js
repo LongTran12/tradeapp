@@ -6,17 +6,19 @@ import SliderCoinContainer from './SliderCoinContainer'
 
 const ChartCoinContainer = () => {
     return (
+
         <Wrap>
             <SliderCoinContainer />
             <Row>
-                <Col>
+                <Col className="stats-card-wrap mat-card">
                     <ChartBitcoin />
                 </Col>
-                <Col>
+                <Col className="stats-card-wrap mat-card">
                     <ChartUSD />
                 </Col>
             </Row>
         </Wrap>
+
     )
 }
 
@@ -27,7 +29,7 @@ const Wrap = styled.div`
 const Row = styled.div`
     display:grid;
     grid-template-columns:1fr 1fr;
-    grid-column-gap:30px;
+    /* grid-column-gap:30px; */
     /* display:flex;
     flex-flow:row wrap;
     margin:0 -15px; */

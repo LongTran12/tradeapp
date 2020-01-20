@@ -2,35 +2,86 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 
 import { FaAlignJustify, FaCcVisa } from 'react-icons/fa';
+import img1 from '../../assets/images/pro-thumb.jpg'
 const Menu = () => {
     const [open, setOpen] = useState(false)
     return (
-        <Wrap>
-            <IconMenu onClick={() => setOpen(!open)}>
-                <FaAlignJustify />
-            </IconMenu>
-            {
-                open &&
-                <>
-                    <Tabbar>
-                        <Ul>
-                            <Li>
-                                <FaAlignJustify />
-                                <span style={{ marginRight: 8 }} ></span>
-                                <div>Crypto</div>
-                            </Li>
-                            <Li>
-                                <FaCcVisa />
-                                <span style={{ marginRight: 8 }} ></span>
-                                <div>Bitcon Daily</div>
-                            </Li>
-                        </Ul>
-                    </Tabbar>
-                    <CloseElement onClick={() => setOpen(false)} />
-                </>
+        <div className="sidebar-area mat-drawer mat-sidenav ng-tns-c3-0 ng-trigger ng-trigger-transform mat-drawer-side mat-drawer-opened ng-star-inserted">
+            <div className="mat-drawer-inner-container">
+                <div className="sidebar-panel gene-sidenav">
+                    <div className="ps">
+                        <div className="ps-content">
+                            <div className="sidebar-container">
+                                <Wrap>
+                                    {/* <IconMenu onClick={() => setOpen(!open)}>
+                                        <FaAlignJustify />
+                                    </IconMenu> */}
+                                    <div class="gene-user-thumb text-center">
+                                        <img alt="user list image" class="img-responsive img-circle"
+                                            height="107" src={img1} width="107" />
+                                        <div class="gene-user-name">John Hobbs</div>
+                                    </div>
+                                    <div className="sidenav-scrollbar-container">
+                                        <div className="navigation mat-nav-list mat-list-base ng-star-inserted">
+                                            <div className="mat-list-item ng-star-inserted">
 
-            }
-        </Wrap>
+                                                <div class="mat-list-item-content">
+                                                    <div class="mat-list-item-ripple mat-ripple" mat-ripple="">
+                                                    </div>
+                                                    <div class="mat-list-text">
+                                                    </div>
+                                                    <a _ngcontent-sso-c4="" class="gene-relative ng-star-inserted" mat-ripple="" menutoggle="" routerlinkactive="active-link" href="/horizontal/dashboard/crm">
+                                                        <div _ngcontent-sso-c4="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">horizontal_split</div>
+                                                        <span _ngcontent-sso-c4="">Top Menu</span>
+                                                        <span _ngcontent-sso-c4="" class="sidebar-label ng-star-inserted">New</span>
+                                                    </a><span _ngcontent-sso-c4="">
+                                                    </span></div>
+                                            </div>
+                                            <div className="mat-list-item ng-star-inserted">
+
+                                                <div class="mat-list-item-content">
+                                                    <div class="mat-list-item-ripple mat-ripple" mat-ripple="">
+                                                    </div>
+                                                    <div class="mat-list-text">
+                                                    </div>
+                                                    <a class="gene-relative ng-star-inserted" mat-ripple="" menutoggle="" routerlinkactive="active-link" href="/horizontal/dashboard/crm">
+                                                        <div class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">horizontal_split</div>
+                                                        <span >Top Menu</span>
+                                                        <span class="sidebar-label ng-star-inserted">New</span>
+                                                    </a><span >
+                                                    </span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {/* {
+                                       
+                                        <div>
+                                            <Tabbar>
+                                                <Ul>
+                                                    <Li>
+                                                        <FaAlignJustify />
+                                                        <span style={{ marginRight: 8 }} ></span>
+                                                        <div>Crypto</div>
+                                                    </Li>
+                                                    <Li>
+                                                        <FaCcVisa />
+                                                        <span style={{ marginRight: 8 }} ></span>
+                                                        <div>Bitcon Daily</div>
+                                                    </Li>
+                                                </Ul>
+                                            </Tabbar>
+                                          
+                                        </div>
+                                    } */}
+                                </Wrap>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div >
     )
 }
 
@@ -49,40 +100,21 @@ const Li = styled.li`
          background: #0c0f2c;
     }
 `
-const CloseElement = styled.div`
-    position:fixed;
-    left:0;
-    top:0;
-    z-index:1198;
-    background:rgba(0,0,0,.5);
-    width:100vw;
-    height:100vw;
+
+const Wrap = styled.div`
+    height:100vh;
 `
-const Wrap = styled.div``
 const Tabbar = styled.div`
-    position:fixed;
+    /* position:fixed;
     width:256px;
     height:100vh;
     background:#18206f;
     top:0;
     left:0;
     z-index:1199;
-    transition: all .7s ease;
+    transition: all .7s ease; */
 `
 const IconMenu = styled.div`
-    position:fixed;
-    left:10em;
-    top:1.5em;
-    width:50px;
-    height:50px;
-    border-radius:999px;
-    cursor: pointer;
-    z-index:1200;
-    background:#18206f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
     svg{
         fill:#fff;  
         width:20px;

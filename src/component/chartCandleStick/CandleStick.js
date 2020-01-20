@@ -90,7 +90,7 @@ const CandleStick = ({ rawData }) => {
         <Wrap>
             <ReactEcharts
                 option={option}
-                style={{ height: '500px', width: '100%' }}
+                style={{ height: '400px', width: '100%' }}
                 className='react_for_echarts' />
         </Wrap>
     )

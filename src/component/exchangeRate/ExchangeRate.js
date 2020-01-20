@@ -9,7 +9,8 @@ import styled from 'styled-components';
 const useStyles = makeStyles(theme => ({
     formControl: {
         // margin: theme.spacing(1),
-        minWidth: 400,
+        // minWidth: 400,
+        width: "100%",
         color: "#fff",
         border: "1px solid rgba(0,0,0,.12)",
         padding: "5px 15px",
@@ -59,7 +60,7 @@ const ExchangeRate = ({ dataSelect, inputLabel, handleChange, value }) => {
 
 export default ExchangeRate
 const Wrap = styled.div`
-    
+     width:100%;
     .MuiInput-underline{
         :before,:hover{
             border-bottom:0 !important;
