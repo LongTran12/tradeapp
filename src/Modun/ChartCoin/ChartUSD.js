@@ -12,7 +12,10 @@ const ChartUSD = () => {
     ];
     return (
         <>
-            <ChartCoin data={data} coinName="USD" srcCoin={imgCoin} lineColor="#e53935" />
+            <ChartCoin data={data} coinName="USD"
+                srcCoin={imgCoin} lineColor="#e53935"
+                perGrow={-1.2}
+            />
         </>
     )
 }

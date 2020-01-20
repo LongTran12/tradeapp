@@ -78,6 +78,7 @@ const Wrap = styled.div`
     background:#fff;
     display:flex;
     flex-flow:column;
+    margin-top:-20px;
     .MuiOutlinedInput-input{
         padding:14px;
     }

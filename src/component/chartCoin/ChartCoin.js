@@ -7,8 +7,9 @@ import {
 } from 'recharts';
 import styled from 'styled-components';
 import CoinName from './CoinName';
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
-const ChartCoin = ({ data, srcCoin, coinName, lineColor }) => {
+const ChartCoin = ({ data, srcCoin, coinName, lineColor, perGrow }) => {
     return (
         <Wrap>
             <ResponsiveContainer width="100%" height={326}>
@@ -24,7 +25,14 @@ const ChartCoin = ({ data, srcCoin, coinName, lineColor }) => {
                 </LineChart>
             </ResponsiveContainer>
             <WrapText>
-                <p>2.4%</p>
+                <Button type="submit">
+                    last 4 day
+                </Button>
+                {
+                    perGrow > 0 ?
+                        <p style={{ fontWeight: "bold", color: "#43a047" }}> <FaArrowUp />{perGrow}%</p> :
+                        <p style={{ fontWeight: "bold", color: "#e53935" }}> <FaArrowDown />{perGrow}%</p>
+                }
             </WrapText>
         </Wrap>
     )
@@ -35,6 +43,10 @@ const WrapText = styled.div`
     position:absolute;
     bottom:0;
     left:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
 `
 const Wrap = styled.div`
     background-color:#fff;
@@ -45,4 +57,13 @@ const Wrap = styled.div`
     .recharts-text{
         font-size:10px;
     }
+`
+const Button = styled.button`
+color:#fff;
+    background-color: #e0e0e0!important;
+    color: rgba(0,0,0,.87)!important;
+        border-radius: 5px;
+    padding: 4px 9px;
+    font-size: .8rem;
+    border:0;
 `

@@ -52,20 +52,60 @@ function App() {
                         </Column>
                     </Row>
                 </Wrap>
+                {/* <WrapPer>
+                    <Per2 className="2/3">
+                        <TableHistory />
+                        <RowPer>
+                            <Column>
+                                <ExchangeRateContainer />
+                            </Column>
+                            <Column>
+                                <QuickTrade />
+                            </Column>
+                        </RowPer>
+                    </Per2>
+                    <Per1 className="1/3">
+                        <Column>
+                            <RecentTrade />
+                        </Column>
+                    </Per1>
+                </WrapPer> */}
             </Site>
         </div>
     );
 }
 
 export default App;
+const WrapPer = styled.div`
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    @media (max-width:1024px){
+        grid-template-columns:1fr;
+        width:100%;
+        overflow:auto;
+    }
+`
+const RowPer = styled.div`
+    display:flex;
+    flex-flow:row wrap;
+     @media (max-width:767px){
+       flex-flow:column;
+    }
+
+`
+const Column = styled.div`
+    flex:1;
+`
+const Per1 = styled.div``
+const Per2 = styled.div``
 const Site = styled.div`
-    padding:6em 25px 0 5px;
+    padding:3em 25px 0 5px;
     
     @media (max-width:1280px){
-        padding:6em 60px 0 25px;
+        padding:3em 60px 0 25px;
     }
     @media (max-width:991px){
-        padding:6em 30px 0 30px;
+        padding:3em 0 0;
     }
     @media (max-width:425px){
         .MuiFormControl-root{
@@ -88,6 +128,4 @@ const Row = styled.div`
          margin:0;   
     }
 `
-const Column = styled.div`
-    flex:1;
-`
+

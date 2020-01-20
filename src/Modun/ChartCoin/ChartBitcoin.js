@@ -24,7 +24,8 @@ const ChartBitcoin = () => {
     ];
     return (
         <>
-            <ChartCoin data={data} coinName="Bitcoin" srcCoin={imgCoin} lineColor="#1565c0" backgr="#1565c0" />
+            <ChartCoin data={data} coinName="Bitcoin"
+                srcCoin={imgCoin} lineColor="#1565c0" perGrow={2.5} />
         </>
     )
 }

@@ -126,65 +126,67 @@ const TableHistory = () => {
     };
 
     return (
-        <div className="stats-card-wrap mat-card">
-            <Wrap>
-                <TextHeader text="Trade History" />
-                <Paper className={classes.root}>
-                    <TableContainer className={classes.container}>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
-                                    {columns.map(column => (
-                                        <TableCell
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{ minWidth: column.minWidth }}
-                                        >
-                                            {column.label}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
-                                    return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={i}>
-                                            {columns.map((column, i) => {
-                                                const value = row[column.id];
-                                                return (
-                                                    <TableCell key={i} align={column.align}>
+        <Wrap>
+            <div className="stats-card-wrap mat-card">
+                <Wrap>
+                    <TextHeader text="Trade History" />
+                    <Paper className={classes.root}>
+                        <TableContainer className={classes.container}>
+                            <Table stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                        {columns.map(column => (
+                                            <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                            >
+                                                {column.label}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
+                                        return (
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={i}>
+                                                {columns.map((column, i) => {
+                                                    const value = row[column.id];
+                                                    return (
+                                                        <TableCell key={i} align={column.align}>
 
-                                                        {column.formatNo === 'no' && value}
+                                                            {column.formatNo === 'no' && value}
 
-                                                        {column.format && typeof value === 'number' && column.format(value)}
+                                                            {column.format && typeof value === 'number' && column.format(value)}
 
-                                                        {column.formatImage && <img alt="" src={value} />}
+                                                            {column.formatImage && <img alt="" src={value} />}
 
-                                                        {column.formatSTT === "status" &&
-                                                            (value === true ? <span style={{ color: "#43a047" }}>buy</span> : <span style={{ color: "#e53935" }} >sell</span>)
-                                                        }
+                                                            {column.formatSTT === "status" &&
+                                                                (value === true ? <span style={{ color: "#43a047" }}>buy</span> : <span style={{ color: "#e53935" }} >sell</span>)
+                                                            }
 
-                                                    </TableCell>
-                                                );
-                                            })}
-                                        </TableRow>
-                                    );
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <TablePagination
-                        rowsPerPageOptions={[10, 25, 100]}
-                        component="div"
-                        count={rows.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                </Paper>
-            </Wrap>
-        </div>
+                                                        </TableCell>
+                                                    );
+                                                })}
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[10, 25, 100]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onChangePage={handleChangePage}
+                            onChangeRowsPerPage={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                </Wrap>
+            </div>
+        </Wrap>
     );
 }
 
@@ -193,8 +195,10 @@ const Wrap = styled.div`
     .MuiTableCell-stickyHeader{
         min-width:unset !important;
         background-color:#fff;
+        overflow:auto;
     }
     .MuiPaper-root{
         box-shadow:unset;
     }
+    
 `
