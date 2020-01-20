@@ -36,7 +36,7 @@ const Coin = ({ coinGrow, coinValue, coinName }) => {
             {textGrow}
             <WrapInfo>
                 <WrapCoin>{coinValue}</WrapCoin>
-                <div>{coinName}</div>
+                <div style={{ whiteSpace: "nowrap" }}>{coinName}</div>
             </WrapInfo>
         </Wrap>
     )
@@ -47,6 +47,9 @@ const Wrap = styled.div`
     display:flex;
     align-items:center;
     padding:20px 0;
+    @media (max-width:500px){
+        margin:0 40px;
+    }
 `
 const RowDown = styled.div`
     display:flex;
