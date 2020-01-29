@@ -1,9 +1,10 @@
 const config = {
   web3Provider:
     "wss://mainnet.infura.io/ws/v3/2526c65276fd4134a550212871a550fd",
-  oteex: "",
-  usdt: "",
-  usdi: "",
+  oteex: "0x8a11305d40C9d562EB2F1Ba1d8e6cE02A554cE5E",
+  ote: "0x7Fa7Ee339b26C35cA5F642cE940c8c1E8639E66e",
+  usdt: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+  usdi: "0xdC1F5E7f20691b33E4cdD872f815E066d221C29D",
   usdtAbi: [
     {
       constant: true,
@@ -733,12 +734,6 @@ const config = {
           type: "address"
         },
         {
-          indexed: true,
-          internalType: "address",
-          name: "seller",
-          type: "address"
-        },
-        {
           indexed: false,
           internalType: "uint256",
           name: "amount",
@@ -749,56 +744,16 @@ const config = {
           internalType: "uint256",
           name: "price",
           type: "uint256"
-        }
-      ],
-      name: "Match",
-      type: "event"
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "owner",
-          type: "address"
         },
         {
           indexed: false,
           internalType: "uint256",
-          name: "amount",
-          type: "uint256"
-        },
-        {
-          indexed: false,
-          internalType: "uint256",
-          name: "price",
+          name: "currency",
           type: "uint256"
         }
       ],
-      name: "OrderMake",
+      name: "Buy",
       type: "event"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256"
-        }
-      ],
-      name: "activeStack",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
     },
     {
       constant: false,
@@ -874,6 +829,205 @@ const config = {
       type: "function"
     },
     {
+      constant: false,
+      inputs: [],
+      name: "deleteContract",
+      outputs: [],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "index",
+          type: "uint256"
+        }
+      ],
+      name: "getStacking",
+      outputs: [
+        {
+          internalType: "address",
+          name: "owner",
+          type: "address"
+        },
+        {
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "term",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "timeStart",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "timePayed",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "status",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "step",
+          type: "uint256"
+        }
+      ],
+      name: "makeOrder",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "address",
+          name: "owner",
+          type: "address"
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256"
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "price",
+          type: "uint256"
+        }
+      ],
+      name: "OrderMake",
+      type: "event"
+    },
+    {
+      constant: false,
+      inputs: [],
+      name: "payStacking",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "address",
+          name: "seller",
+          type: "address"
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256"
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "price",
+          type: "uint256"
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "currency",
+          type: "uint256"
+        }
+      ],
+      name: "Sell",
+      type: "event"
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "term",
+          type: "uint256"
+        }
+      ],
+      name: "stackingOTE",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      name: "activeStack",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
       constant: true,
       inputs: [
         {
@@ -941,49 +1095,18 @@ const config = {
       type: "function"
     },
     {
-      constant: false,
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "index",
-          type: "uint256"
-        }
-      ],
-      name: "getStacking",
+      constant: true,
+      inputs: [],
+      name: "getPrice",
       outputs: [
         {
-          internalType: "address",
-          name: "owner",
-          type: "address"
-        },
-        {
           internalType: "uint256",
-          name: "amount",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "term",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "timeStart",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "timePayed",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "status",
+          name: "",
           type: "uint256"
         }
       ],
       payable: false,
-      stateMutability: "nonpayable",
+      stateMutability: "view",
       type: "function"
     },
     {
@@ -1004,73 +1127,6 @@ const config = {
       ],
       payable: false,
       stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "amount",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "step",
-          type: "uint256"
-        }
-      ],
-      name: "makeOrder",
-      outputs: [
-        {
-          internalType: "bool",
-          name: "",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [],
-      name: "payStacking",
-      outputs: [
-        {
-          internalType: "bool",
-          name: "",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "amount",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "term",
-          type: "uint256"
-        }
-      ],
-      name: "stackingOTE",
-      outputs: [
-        {
-          internalType: "bool",
-          name: "",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "nonpayable",
       type: "function"
     }
   ]

@@ -5,10 +5,12 @@ import "./assets/scss/style.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import Web3Provider from "./provider/web3";
-
+import AppState from "./provider/appContext";
 ReactDOM.render(
   <Web3Provider>
-    <App />
+    <AppState>
+      <App />
+    </AppState>
   </Web3Provider>,
   document.getElementById("root")
 );

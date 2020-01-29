@@ -11,15 +11,12 @@ const WrapWeb3 = ({ children }) => {
     web3: undefined,
     contract: undefined,
     usdt: undefined,
-    usdi: undefined
+    usdi: undefined,
+    ote: undefined
   });
 
   useEffect(() => {
     const checkWeb3 = () => {
-      setState({
-        ...web3State,
-        loading: true
-      });
       if (window.ethereum) {
         let web3 = new Web3(window.ethereum);
         try {
@@ -28,14 +25,15 @@ const WrapWeb3 = ({ children }) => {
             .then(function(accounts) {
               // User has allowed account access to DApp...
               let w3contract = window.web3.eth
-                .contract(config.oteex)
-                .at(config.oteexAbi);
+                .contract(config.oteexAbi)
+                .at(config.oteex);
               let usdi = window.web3.eth
-                .contract(config.usdi)
-                .at(config.usdiAbi);
+                .contract(config.usdiAbi)
+                .at(config.usdi);
               let usdt = window.web3.eth
-                .contract(config.usdt)
-                .at(config.usdtAbi);
+                .contract(config.usdtAbi)
+                .at(config.usdt);
+              let ote = window.web3.eth.contract(config.usdiAbi).at(config.ote);
               setState({
                 loading: false,
                 installed: true,
@@ -44,7 +42,8 @@ const WrapWeb3 = ({ children }) => {
                 web3: web3,
                 contract: w3contract,
                 usdt,
-                usdi
+                usdi,
+                ote
               });
             })
             .catch(e => {
@@ -57,7 +56,7 @@ const WrapWeb3 = ({ children }) => {
                 usdt: undefined,
                 usdi: undefined
               });
-              setTimeout(() => checkWeb3(), 1000);
+              setTimeout(() => !web3State.loading && checkWeb3(), 1000);
             });
         } catch (e) {
           setState({
@@ -79,6 +78,7 @@ const WrapWeb3 = ({ children }) => {
           .at(config.oteexAbi);
         let usdi = window.web3.eth.contract(config.usdi).at(config.usdiAbi);
         let usdt = window.web3.eth.contract(config.usdt).at(config.usdtAbi);
+        let ote = window.web3.eth.contract(config.usdiAbi).at(config.ote);
         setState({
           loading: false,
           installed: true,
@@ -87,7 +87,8 @@ const WrapWeb3 = ({ children }) => {
           web3: web3,
           contract: w3contract,
           usdi,
-          usdt
+          usdt,
+          ote
         });
       }
       // Non-DApp Browsers

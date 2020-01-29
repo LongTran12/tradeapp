@@ -1,119 +1,173 @@
-import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField';
-import styled from 'styled-components';
-import ExchangeRate from '../exchangeRate/ExchangeRate';
-
+import React, { useState, useContext } from "react";
+import TextField from "@material-ui/core/TextField";
+import styled from "styled-components";
+import ExchangeRate from "../exchangeRate/ExchangeRate";
+import { AppContext } from "../../provider/appContext";
+import { Web3Context } from "../../provider/web3";
+import { contractPublic, otePublic } from "../../provider/web3Public";
+import { config } from "../../config";
 const TradeSell = () => {
-    const dataCoin1 = [
-        {
-            name: "Bitcoin",
-            value: '12s'
-        },
-        {
-            name: "ETh",
-            value: '21'
-        },
-        {
-            name: "OTC",
-            value: '234'
-        }
-    ]
-    const [coin, setCoin] = useState(`${dataCoin1[0].value}`)
-    const handleChange = event => {
-        setCoin(event.target.value);
-    };
-    return (
-        <form>
-            <Wrap>
-                <ExchangeRate
-                    inputLabel="Choose Currency"
-                    dataSelect={dataCoin1}
-                    value={coin}
-                    handleChange={handleChange}
-                />
-                <span style={{ marginBottom: 30 }} />
-                <TextField
-                    id="outlined-helperText"
-                    label="Select Amount"
-                    defaultValue={300}
-                    type="number"
-                    variant="outlined"
-                />
-                <span style={{ marginBottom: 30 }} />
-                <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    defaultValue="1234"
-                    variant="outlined"
-                />
-                <span style={{ marginBottom: 30 }} />
-                <TextField
-                    id="outlined-helperText"
-                    label="Wallet Address"
-                    defaultValue="AXB35H24ISDJHCISDT"
-                    type="text"
-                    variant="outlined"
-                />
-                <span style={{ marginBottom: 30 }} />
-                <Text>Your Account will be credited with 220 $ </Text>
-                <span style={{ marginBottom: 10 }} />
-                <WrapButton>
-                    <Button type="submit">
-                        Sell
-                </Button>
-                    <span style={{ marginRight: 5 }} />
-                    <Text>Transaction successfull</Text>
-                </WrapButton>
-            </Wrap>
-
-        </form>
-    )
-}
-
-export default TradeSell
-const Wrap = styled.div`
-    background:#fff;
-    display:flex;
-    flex-flow:column;
-    .MuiOutlinedInput-input{
-        padding:14px;
+  const { otePrice } = useContext(AppContext);
+  const { contract, address, ote } = useContext(Web3Context);
+  const dataPrice = [
+    {
+      name: "0.5$",
+      value: 0
+    },
+    {
+      name: "0.75$",
+      value: 1
+    },
+    {
+      name: "1$",
+      value: 2
     }
-`
+  ];
+  if (otePrice / 10 ** 6 === 1) {
+    dataPrice = [
+      {
+        name: "0.75$",
+        value: 1
+      },
+      {
+        name: "1$",
+        value: 2
+      }
+    ];
+  }
+  if (otePrice / 10 ** 6 === 1.5) {
+    dataPrice = [
+      {
+        name: "1$",
+        value: 2
+      }
+    ];
+  }
+
+  const [price, setPrice] = useState(`${dataPrice[0].value}`);
+  const handleChange = event => {
+    setPrice(event.target.value);
+  };
+  const [amount, setAmount] = useState(100);
+  const makeOrder = async () => {
+    let allow = await otePublic.methods.allowance(address, config.oteex).call();
+    if (allow >= amount * 10 ** 18) {
+      contract.makeOrder(amount * 10 ** 18, price, { value: 0 }, err => {
+        if (err) {
+          console.log(err.message);
+        } else {
+          console.log("Make order success!");
+        }
+      });
+    } else {
+      ote.approve(config.oteex, amount * 10 ** 18, { value: 0 }, err => {
+        if (err) {
+          console.log(err.message);
+        } else {
+          console.log("Approve success!");
+          checkAndBuy();
+        }
+      });
+    }
+  };
+
+  const checkAndBuy = async () => {
+    console.log("checkandBuy");
+    let allow = await otePublic.methods.allowance(address, config.oteex).call();
+    if (allow >= amount * 10 ** 18) {
+      contract.makeOrder(amount * 10 ** 18, price, { value: 0 }, err => {
+        if (err) {
+          console.log(err.message);
+        } else {
+          console.log("Make order success!");
+        }
+      });
+    } else {
+      setTimeout(() => {
+        checkAndBuy();
+      }, 1000);
+    }
+  };
+  return (
+    <Wrap>
+      <ExchangeRate
+        inputLabel="Choose Price"
+        dataSelect={dataPrice}
+        value={price}
+        handleChange={handleChange}
+      />
+      <span style={{ marginBottom: 30 }} />
+      <TextField
+        id="outlined-helperText"
+        label="Select Amount"
+        value={amount}
+        onChange={e => setAmount(e.target.value)}
+        onBlur={e => {
+          if (e.target.value < 100) {
+            setAmount(100);
+            alert("Must be bigger than 100 OTE");
+          }
+        }}
+        type="number"
+        variant="outlined"
+      />
+      <span style={{ marginBottom: 30 }} />
+      <WrapButton>
+        <Button
+          onClick={() => {
+            makeOrder();
+          }}
+        >
+          Make Sell Order
+        </Button>
+      </WrapButton>
+    </Wrap>
+  );
+};
+
+export default TradeSell;
+const Wrap = styled.div`
+  background: #fff;
+  display: flex;
+  flex-flow: column;
+  .MuiOutlinedInput-input {
+    padding: 14px;
+  }
+`;
 const Text = styled.div`
-    color:#43a047;
-    text-align:left;
-`
+  color: #43a047;
+  text-align: left;
+`;
 const WrapButton = styled.div`
-    display:flex;
-    align-items:center;
-`
+  display: flex;
+  align-items: center;
+`;
 const Button = styled.button`
-    color:#fff;
-       background-color: #1565c0;
-       box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-       box-sizing: border-box;
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    outline: 0;
-    border: none;
-    -webkit-tap-highlight-color: transparent;
-    display: inline-block;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-    text-align: center;
-    margin: 0;
-    min-width: 64px;
-    line-height: 36px;
-    padding: 0 16px;
-    border-radius: 4px;
-    overflow: visible;
-    transform: translate3d(0,0,0);
-    font-size:14px;
-`
+  color: #fff;
+  background-color: #1565c0;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  overflow: visible;
+  transform: translate3d(0, 0, 0);
+  font-size: 14px;
+`;

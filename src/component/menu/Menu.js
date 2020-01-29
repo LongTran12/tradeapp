@@ -24,11 +24,11 @@ const Menu = () => {
                       src={img1}
                       width="107"
                     />
-                    <div claclassNames="gene-user-name">John Hobbs</div>
+                    <div className="gene-user-name">John Hobbs</div>
                   </div>
                   <div className="sidenav-scrollbar-container">
                     <div className="navigation mat-nav-list mat-list-base ng-star-inserted">
-                      <div className="mat-list-item ng-star-inserted">
+                      {/* <div className="mat-list-item ng-star-inserted">
                         <div className="mat-list-item-content">
                           <div
                             className="mat-list-item-ripple mat-ripple"
@@ -61,8 +61,8 @@ const Menu = () => {
                           </a>
                           <span _ngcontent-sso-c4=""></span>
                         </div>
-                      </div>
-                      <div className="mat-list-item ng-star-inserted">
+                      </div> */}
+                      {/* <div className="mat-list-item ng-star-inserted">
                         <div className="mat-list-item-content">
                           <div
                             className="mat-list-item-ripple mat-ripple"
@@ -90,7 +90,7 @@ const Menu = () => {
                           </a>
                           <span></span>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 

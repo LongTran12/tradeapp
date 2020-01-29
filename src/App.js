@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import ChartCoinContainer from "./Modun/ChartCoin/ChartCoinContainer";
 import "slick-carousel/slick/slick.css";
@@ -9,32 +9,16 @@ import ExchangeRateContainer from "./Modun/exchangeRate/ExchangeRateContainer";
 import RecentTrade from "./Modun/recendTrade/RecentTrade";
 import QuickTrade from "./Modun/quickTrade/QuickTrade";
 import Menu from "./component/menu/Menu";
-import { Web3Context } from "./provider/web3";
-
 function App() {
-  const { web3 } = useContext(Web3Context);
-  console.log(web3);
   return (
     <div className="app .sidebar-color-dark header-color-dark side-panel-opened collapsed-sidebar">
       <div className="mat-drawer-backdrop ng-star-inserted"></div>
       <div
         className="cdk-visually-hidden cdk-focus-trap-anchor"
         aria-hidden="true"
-      ></div>
+      />
       <Menu />
       <Site className="mat-drawer-content mat-sidenav-content ng-star-inserted">
-        {/* <div className="gene-header-toolbar mat-toolbar mat-toolbar-single-row">
-                    <div className="gene-ham-icon">
-                        <button class="mat-mini-fab mat-button-base mat-primary" color="primary" mat-card-icon="" mat-mini-fab="">
-                            <span class="mat-button-wrapper">
-                                <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">menu</mat-icon>
-                            </span>
-                            <div class="mat-button-ripple mat-ripple mat-button-ripple-round"></div><div class="mat-button-focus-overlay">
-                            </div>
-                        </button>
-                    </div>
-                </div> */}
-
         <Wrap>
           <ChartCoinContainer />
         </Wrap>
@@ -46,9 +30,9 @@ function App() {
         </Wrap>
         <Wrap>
           <Row>
-            <Column>
+            {/* <Column>
               <ExchangeRateContainer />
-            </Column>
+            </Column> */}
             <Column>
               <QuickTrade />
             </Column>
