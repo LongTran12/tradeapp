@@ -6,7 +6,7 @@ const CandleStick = ({ chart }) => {
   return (
     <Wrap>
       <Bar
-        height={80}
+        height={110}
         data={{
           labels: ["0.5$", "0.75$", "1$"],
           datasets: [
