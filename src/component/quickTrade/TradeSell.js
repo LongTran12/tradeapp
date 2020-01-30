@@ -5,6 +5,8 @@ import ExchangeRate from "../exchangeRate/ExchangeRate";
 import { AppContext } from "../../provider/appContext";
 import { Web3Context } from "../../provider/web3";
 import { contractPublic, otePublic } from "../../provider/web3Public";
+
+import { message } from "antd";
 import { config } from "../../config";
 const TradeSell = () => {
   const { otePrice } = useContext(AppContext);
@@ -55,7 +57,9 @@ const TradeSell = () => {
       contract.makeOrder(amount * 10 ** 18, price, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Make order success!");
           console.log("Make order success!");
         }
       });
@@ -63,28 +67,34 @@ const TradeSell = () => {
       ote.approve(config.oteex, amount * 10 ** 18, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Approve success!");
+          const hide = message.loading("Action in progress..", 0);
           console.log("Approve success!");
-          checkAndBuy();
+          checkAndBuy(hide);
         }
       });
     }
   };
 
-  const checkAndBuy = async () => {
+  const checkAndBuy = async hide => {
     console.log("checkandBuy");
     let allow = await otePublic.methods.allowance(address, config.oteex).call();
     if (allow >= amount * 10 ** 18) {
+      hide && hide();
       contract.makeOrder(amount * 10 ** 18, price, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Make order success!");
           console.log("Make order success!");
         }
       });
     } else {
       setTimeout(() => {
-        checkAndBuy();
+        checkAndBuy(hide);
       }, 1000);
     }
   };

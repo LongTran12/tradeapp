@@ -29,6 +29,25 @@ const CandleStick = ({ chart }) => {
             }
           ]
         }}
+        options={{
+          tooltips: {
+            mode: "index",
+            intersect: false
+          },
+          responsive: true,
+          scales: {
+            xAxes: [
+              {
+                stacked: true
+              }
+            ],
+            yAxes: [
+              {
+                stacked: true
+              }
+            ]
+          }
+        }}
       />
     </Wrap>
   );

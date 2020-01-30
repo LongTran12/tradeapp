@@ -5,6 +5,7 @@ import ExchangeRate from "../exchangeRate/ExchangeRate";
 import { Web3Context } from "../../provider/web3";
 import { otePublic } from "../../provider/web3Public";
 import { config } from "../../config";
+import { message } from "antd";
 const TradeTransfer = () => {
   const { contract, address, ote } = useContext(Web3Context);
   const [amount, setAmount] = useState(100);
@@ -32,7 +33,9 @@ const TradeTransfer = () => {
       contract.stackingOTE(amount * 10 ** 18, term, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Stacking success!");
           console.log("Stacking success!");
         }
       });
@@ -40,28 +43,34 @@ const TradeTransfer = () => {
       ote.approve(config.oteex, amount * 10 ** 18, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Approve success!");
+          const hide = message.loading("Action in progress..", 0);
           console.log("Approve success!");
-          checkAndBuy();
+          checkAndBuy(hide);
         }
       });
     }
   };
 
-  const checkAndBuy = async () => {
+  const checkAndBuy = async hide => {
     console.log("checkandBuy");
     let allow = await otePublic.methods.allowance(address, config.oteex).call();
     if (allow >= amount * 10 ** 18) {
+      hide && hide();
       contract.stackingOTE(amount * 10 ** 18, term, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Stacking success!");
           console.log("Stacking success!");
         }
       });
     } else {
       setTimeout(() => {
-        checkAndBuy();
+        checkAndBuy(hide);
       }, 1000);
     }
   };

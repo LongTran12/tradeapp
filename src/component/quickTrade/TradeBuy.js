@@ -6,6 +6,7 @@ import { AppContext } from "../../provider/appContext";
 import { Web3Context } from "../../provider/web3";
 import { usdtPublic, usdiPublic } from "../../provider/web3Public";
 import { config } from "../../config";
+import { message } from "antd";
 const TradeBuy = () => {
   const { otePrice } = useContext(AppContext);
   const { contract, address, usdt, usdi } = useContext(Web3Context);
@@ -37,8 +38,10 @@ const TradeBuy = () => {
       contract.buyOTE(amount * 10 ** 18, coin, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
           console.log("Buy success!");
+          message.info("Buy success!");
         }
       });
     } else {
@@ -46,25 +49,31 @@ const TradeBuy = () => {
         usdi.approve(config.oteex, otePrice * amount, { value: 0 }, err => {
           if (err) {
             console.log(err.message);
+            message.error(err.message);
           } else {
             console.log("Approve success!");
-            checkAndBuy();
+            message.info("Approve success!");
+            const hide = message.loading("Action in progress..", 0);
+            checkAndBuy(hide);
           }
         });
       } else {
         usdt.approve(config.oteex, otePrice * amount, { value: 0 }, err => {
           if (err) {
             console.log(err.message);
+            message.error(err.message);
           } else {
             console.log("Approve success!");
-            checkAndBuy();
+            message.info("Approve success!");
+            const hide = message.loading("Action in progress..", 0);
+            checkAndBuy(hide);
           }
         });
       }
     }
   };
 
-  const checkAndBuy = async () => {
+  const checkAndBuy = async hide => {
     console.log("checkandBuy");
     let allow = 0;
     if (Number(coin) === 1) {
@@ -74,23 +83,20 @@ const TradeBuy = () => {
     }
     console.log("check", allow, otePrice * amount);
     if (allow >= otePrice * amount) {
+      hide && hide();
       contract.buyOTE(amount * 10 ** 18, coin, { value: 0 }, err => {
         if (err) {
           console.log(err.message);
+          message.error(err.message);
         } else {
+          message.info("Buy success!");
           console.log("Buy success!");
         }
       });
     } else {
-      if (coin === 1) {
-        setTimeout(() => {
-          checkAndBuy();
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          checkAndBuy();
-        }, 1000);
-      }
+      setTimeout(() => {
+        checkAndBuy(hide);
+      }, 1000);
     }
   };
   return (
