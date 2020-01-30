@@ -11,14 +11,15 @@ import QuickTrade from "./Modun/quickTrade/QuickTrade";
 import Menu from "./component/menu/Menu";
 function App() {
   return (
-    <div className="app .sidebar-color-dark header-color-dark side-panel-opened collapsed-sidebar">
+    <div className="app .sidebar-color-dark header-color-dark  collapsed-sidebar">
       <div className="mat-drawer-backdrop ng-star-inserted"></div>
       <div
         className="cdk-visually-hidden cdk-focus-trap-anchor"
         aria-hidden="true"
       />
-      <Menu />
+      {/* <Menu /> */}
       <Site className="mat-drawer-content mat-sidenav-content ng-star-inserted">
+        {/* <Site> */}
         <Wrap>
           <ChartCoinContainer />
         </Wrap>
@@ -48,13 +49,13 @@ function App() {
 
 export default App;
 const Site = styled.div`
-  padding: 6em 25px 0 5px;
+  padding: 6em 25px 0 25px;
 
   @media (max-width: 1280px) {
-    padding: 6em 60px 0 25px;
+    padding: 6em 25px 0 25px;
   }
   @media (max-width: 991px) {
-    padding: 6em 30px 0 30px;
+    padding: 6em 15px 0 15px;
   }
   @media (max-width: 425px) {
     .MuiFormControl-root {

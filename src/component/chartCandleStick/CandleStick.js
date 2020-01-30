@@ -6,6 +6,7 @@ const CandleStick = ({ chart }) => {
   return (
     <Wrap>
       <Bar
+        height={80}
         data={{
           labels: ["0.5$", "0.75$", "1$"],
           datasets: [
@@ -34,7 +35,8 @@ const CandleStick = ({ chart }) => {
             mode: "index",
             intersect: false
           },
-          responsive: true,
+          // responsive: true,
+          maintainAspectRatio: false,
           scales: {
             xAxes: [
               {
