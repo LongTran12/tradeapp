@@ -15,10 +15,15 @@ export default ({ children }) => {
         contractPublic.methods.getChart().call(),
         contractPublic.methods.getPrice().call()
       ]);
+      let totalSeller = 0;
+      chart.order.map(item => (totalSeller += Number(item)));
       setAppState({
         ...appState,
         otePrice: price,
-        chart: chart
+        oteStacking: stacking.total / 10 ** 18,
+        chart: chart,
+        oteSeller: totalSeller / 10 ** 18,
+        totalMemberStacking: stacking.totalMem
       });
     };
     getDetail();

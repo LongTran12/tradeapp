@@ -11,7 +11,7 @@ import { config } from "../../config";
 const TradeSell = () => {
   const { otePrice } = useContext(AppContext);
   const { contract, address, ote } = useContext(Web3Context);
-  const dataPrice = [
+  let dataPrice = [
     {
       name: "0.5$",
       value: 0
@@ -25,7 +25,7 @@ const TradeSell = () => {
       value: 2
     }
   ];
-  if (otePrice / 10 ** 6 === 1) {
+  if (otePrice / 10 ** 6 === 0.75) {
     dataPrice = [
       {
         name: "0.75$",
@@ -37,7 +37,7 @@ const TradeSell = () => {
       }
     ];
   }
-  if (otePrice / 10 ** 6 === 1.5) {
+  if (otePrice / 10 ** 6 === 1) {
     dataPrice = [
       {
         name: "1$",

@@ -1,10 +1,10 @@
 const config = {
   web3Provider:
-    "wss://mainnet.infura.io/ws/v3/2526c65276fd4134a550212871a550fd",
-  oteex: "0xaE5E2D38C1F1Be5492Fd2634787d0407f873fB82",
-  ote: "0x7Fa7Ee339b26C35cA5F642cE940c8c1E8639E66e",
-  usdt: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-  usdi: "0xdC1F5E7f20691b33E4cdD872f815E066d221C29D",
+    "wss://ropsten.infura.io/ws/v3/2526c65276fd4134a550212871a550fd",
+  oteex: "0x4811b2EE52B5257Fd6dDa5E9c4A04381BcF84FdF",
+  ote: "0x4BbE3390F5E0310736ee72aDE8De799161d878e8",
+  usdt: "0x94afE8262559b62aF15603859Ccf044894B85FC3",
+  usdi: "0xfBC3F05D5042e63C0F732DD48B25161ac10D8602",
   usdtAbi: [
     {
       constant: true,
@@ -830,8 +830,14 @@ const config = {
     },
     {
       constant: false,
-      inputs: [],
-      name: "deleteContract",
+      inputs: [
+        {
+          internalType: "address",
+          name: "_bot",
+          type: "address"
+        }
+      ],
+      name: "changeBot",
       outputs: [],
       payable: false,
       stateMutability: "nonpayable",
@@ -839,46 +845,9 @@ const config = {
     },
     {
       constant: false,
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "index",
-          type: "uint256"
-        }
-      ],
-      name: "getStacking",
-      outputs: [
-        {
-          internalType: "address",
-          name: "owner",
-          type: "address"
-        },
-        {
-          internalType: "uint256",
-          name: "amount",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "term",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "timeStart",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "timePayed",
-          type: "uint256"
-        },
-        {
-          internalType: "uint256",
-          name: "status",
-          type: "uint256"
-        }
-      ],
+      inputs: [],
+      name: "deleteContract",
+      outputs: [],
       payable: false,
       stateMutability: "nonpayable",
       type: "function"
@@ -905,6 +874,15 @@ const config = {
           type: "bool"
         }
       ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [],
+      name: "nextMonth",
+      outputs: [],
       payable: false,
       stateMutability: "nonpayable",
       type: "function"
@@ -1029,6 +1007,21 @@ const config = {
     },
     {
       constant: true,
+      inputs: [],
+      name: "getActiveStackCount",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
       inputs: [
         {
           internalType: "uint256",
@@ -1061,6 +1054,89 @@ const config = {
         {
           internalType: "uint256[]",
           name: "order",
+          type: "uint256[]"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address[]",
+          name: "_refs",
+          type: "address[]"
+        }
+      ],
+      name: "getCurrentSales",
+      outputs: [
+        {
+          internalType: "uint256[]",
+          name: "",
+          type: "uint256[]"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "investor",
+          type: "address"
+        }
+      ],
+      name: "getMemberActiveStacking",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "investor",
+          type: "address"
+        }
+      ],
+      name: "getMemberStacking",
+      outputs: [
+        {
+          internalType: "uint256[]",
+          name: "amount",
+          type: "uint256[]"
+        },
+        {
+          internalType: "uint256[]",
+          name: "term",
+          type: "uint256[]"
+        },
+        {
+          internalType: "uint256[]",
+          name: "timeStart",
+          type: "uint256[]"
+        },
+        {
+          internalType: "uint256[]",
+          name: "timePayed",
+          type: "uint256[]"
+        },
+        {
+          internalType: "uint256[]",
+          name: "status",
           type: "uint256[]"
         }
       ],
@@ -1111,6 +1187,78 @@ const config = {
     },
     {
       constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "_investor",
+          type: "address"
+        },
+        {
+          internalType: "uint256",
+          name: "_month",
+          type: "uint256"
+        }
+      ],
+      name: "getSale",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "index",
+          type: "uint256"
+        }
+      ],
+      name: "getStacking",
+      outputs: [
+        {
+          internalType: "address",
+          name: "owner",
+          type: "address"
+        },
+        {
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "term",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "timeStart",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "timePayed",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "status",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
       inputs: [],
       name: "getStackingStats",
       outputs: [
@@ -1122,6 +1270,78 @@ const config = {
         {
           internalType: "uint256",
           name: "totalMem",
+          type: "uint256"
+        },
+        {
+          internalType: "uint256",
+          name: "stackTotal",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "",
+          type: "address"
+        },
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      name: "memberStack",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "needPayStacking",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "",
+          type: "address"
+        },
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256"
+        }
+      ],
+      name: "newStack",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
           type: "uint256"
         }
       ],

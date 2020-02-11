@@ -3,13 +3,19 @@ import styled from "styled-components";
 import StatsItem from "../../component/StatsItem";
 import { AppContext } from "../../provider/appContext";
 const ChartCoinContainer = () => {
-  const { oteSeller, oteStacking, otePrice } = useContext(AppContext);
+  const { oteSeller, oteStacking, otePrice, totalMemberStacking } = useContext(
+    AppContext
+  );
   return (
     <Row>
       <StatsItem bg="warn" number={oteSeller} title="Sell Order" />
       <StatsItem bg="accent" number={oteStacking} title="Stacking" />
       <StatsItem bg="success" number={otePrice / 10 ** 6} title="OTE Price" />
-      <StatsItem bg="primary" number={10} title="Total Member" />
+      <StatsItem
+        bg="primary"
+        number={totalMemberStacking}
+        title="Total Member"
+      />
     </Row>
   );
 };

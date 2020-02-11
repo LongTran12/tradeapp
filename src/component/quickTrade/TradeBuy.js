@@ -45,7 +45,7 @@ const TradeBuy = () => {
         }
       });
     } else {
-      if (coin === 1) {
+      if (Number(coin) === 1) {
         usdi.approve(config.oteex, otePrice * amount, { value: 0 }, err => {
           if (err) {
             console.log(err.message);
